@@ -19,8 +19,4 @@ function generatePassword($length) {
     }
 
     return $password;
-}
-
-$password_length = isset($_GET['password_length']) ? intval($_GET['password_length']) : '' ;
-
-$password = generatePassword($password_length);
+};

@@ -1,6 +1,19 @@
 <?php
 
-include_once __DIR__ . '/partials/functions.php'
+include_once __DIR__ . '/functions.php';
+
+session_start();
+
+if (isset($_GET['password_length'])) {
+
+    $password_length = intval($_GET['password_length']);
+    $password = generatePassword($password_length);
+    
+    $_SESSION['generated_password'] = $password;
+    
+    header('Location: /display_password.php');
+}
+
 
 ?>
 
@@ -19,17 +32,13 @@ include_once __DIR__ . '/partials/functions.php'
 <body>
 
     <div class="container mt-5">
-        <form action="index.php" method="get" class="w-25">
+        <form action="display_password.php" method="get" class="w-25">
             <div class="mb-3">
                 <label for="password-length" class="form-label">Password Length</label>
                 <input type="number" class="form-control" id="password-length" name="password_length">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-
-        <h5 class="mt-5">Generated password</h5>
-    
-        <div><?php echo $password; ?></div>
     </div>
 
 
